@@ -4,6 +4,13 @@
 let deck= document.querySelector(".deck");
 let restart=document.querySelector(".restart");
 let elements=document.querySelectorAll(".card");
+const chi=[];
+const chinod=[];
+const chinodclass=[];
+
+
+
+
 
 
 /*
@@ -15,22 +22,27 @@ let elements=document.querySelectorAll(".card");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    var currentIndex = array.length;
+    var randomIndex;
+    var temporaryValue;
+    
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
+        console.log(randomIndex)
         currentIndex -= 1;
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
+        
     }
-
+     console.log(array)
     return array;
 }
 deck.addEventListener('click',function (e) {
-//     console.log(e.target)
+    console.log(e.target)
 
-//  let x = e.target;
+  let x = e.target;
  
     e.target.classList.add("open","show")
     
@@ -39,12 +51,37 @@ deck.addEventListener('click',function (e) {
 
 restart.addEventListener('click',function (e) {
    
-   // var deckopen=document.getElementsByClassName("card open show")
+    //var deckopen=document.getElementsByClassName("fa fa-diamond")
+   
+    
+    //console.log(deckopen);
+    //console.log(deckopen);
+  
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.remove("card","open","show");
         elements[i].classList.add("card");
+        chi[i]=elements[i].children;
+        chinod[i]=elements[i].childNodes[1]
+        chinodclass[i]=elements[i].childNodes[1].classList
+       // console.log(chinodclass[i])
+        
 
      }
+     //console.log(chi);
+     var ele= shuffle(chinod);
+     //console.log(chinodclass);
+     
+     
+     for (var i = 0; i < ele.length; i++) {
+     elements[i].childNodes[1].replaceWith(ele[i])
+     }
+     
+     
+    // elements[0].childNodes[0].classList.add("fa fa-paper-plane-o")
+
+     
+
+     
     
   
  
