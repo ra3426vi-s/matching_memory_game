@@ -4,9 +4,20 @@
 let deck= document.querySelector(".deck");
 let restart=document.querySelector(".restart");
 let elements=document.querySelectorAll(".card");
-const chi=[];
-const chinod=[];
-const chinodclass=[];
+//let cardopen= document.querySelectorAll(".card.open.show");
+
+let anchorelements =document.querySelectorAll(".card i")
+allclasses=[]
+cardopen=[]
+for (let i=0;i<anchorelements.length;i++){
+allclasses.push(anchorelements[i].className);
+}
+// let test =document.querySelectorAll(".card" ,".fa",".fa-cube")
+//console.log(allclasses)
+// const chi=[];
+// const chinod=[];
+// const chinodclass=[];
+// let x
 
 
 
@@ -22,9 +33,7 @@ const chinodclass=[];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length;
-    var randomIndex;
-    var temporaryValue;
+    var currentIndex = array.length,randomIndex,temporaryValue;
     
 
     while (currentIndex !== 0) {
@@ -39,12 +48,50 @@ function shuffle(array) {
      console.log(array)
     return array;
 }
+var k=0
+var count=1
+array=[]
 deck.addEventListener('click',function (e) {
-    console.log(e.target)
-
-  let x = e.target;
- 
+     
     e.target.classList.add("open","show")
+    console.log(e.target)
+    cardopen.push(e.target.querySelector(".card i"))
+    console.log(cardopen)
+    
+    if (cardopen.length%2==0){
+        if(cardopen[cardopen.length-2].className!=cardopen[cardopen.length-1].className){  
+            //console.log("not equal")      
+            setTimeout(function(){
+                // Instructions after delay
+            
+            for (var i = 0; i < elements.length; i++) {
+                //elements[i].classList.remove("card","open","show");
+                if(cardopen[cardopen.length-2]==anchorelements[i]){
+                    elements[i].classList.remove("open","show");
+                   
+
+                }
+                if(cardopen[cardopen.length-1]==anchorelements[i]){
+                    elements[i].classList.remove("open","show");
+                   
+
+                }
+
+                
+
+            } 
+            cardopen=[];  
+            },2000); 
+
+        }
+        if(cardopen[cardopen.length-2].className==cardopen[cardopen.length-1].className){
+            //console.log("equal")
+            cardopen=[]; 
+
+        }
+    }
+   
+    
     
 
 })
@@ -56,25 +103,33 @@ restart.addEventListener('click',function (e) {
     
     //console.log(deckopen);
     //console.log(deckopen);
+   
+    
+
   
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.remove("card","open","show");
         elements[i].classList.add("card");
-        chi[i]=elements[i].children;
-        chinod[i]=elements[i].childNodes[1]
-        chinodclass[i]=elements[i].childNodes[1].classList
+        // chi[i]=elements[i].children;
+        // chinod[i]=elements[i].childNodes[1]
+        // console.log(chinod[i]);
+        //chinodclass[i]=elements[i].childNodes[1].classList
        // console.log(chinodclass[i])
         
 
      }
-     //console.log(chi);
-     var ele= shuffle(chinod);
-     //console.log(chinodclass);
+     //console.log(chinod);
+     var ele= shuffle(allclasses);
+     //var cardte=shuffle(elements);
+     //console.log("hi",cardte[0]);
      
      
      for (var i = 0; i < ele.length; i++) {
-     elements[i].childNodes[1].replaceWith(ele[i])
-     }
+        //console.log("hey",elements[i].childNodes[1])    
+     anchorelements[i].className=ele[i]
+    //  console.log("hi tfis is here")
+    //  console.log(elements[i].childNodes[1])
+      }
      
      
     // elements[0].childNodes[0].classList.add("fa fa-paper-plane-o")
@@ -87,15 +142,6 @@ restart.addEventListener('click',function (e) {
  
 })
 
-  
-       
-// function cardopen(){
-//     console.log("working caedopen")
-    
-   
-
-
-// }
 
 
 /*
