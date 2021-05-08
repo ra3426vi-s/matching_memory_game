@@ -89,6 +89,7 @@ deck.addEventListener("click", function (e) {
         }
         cardopen = [];
         moves = moves + 1;
+        score.innerHTML = moves;
       }, 2000);
     }
     if (
@@ -99,9 +100,11 @@ deck.addEventListener("click", function (e) {
       cardopen = [];
       moves = moves + 1;
       match = match + 2;
+      score.innerHTML = moves;
     }
   }
   rating();
+  
 });
 
 restart.addEventListener("click", function (e) {
@@ -131,8 +134,14 @@ restart.addEventListener("click", function (e) {
     //  console.log(elements[i].childNodes[1])
   }
   timerReset();
+  stars.children[0].className="stars"
+  stars.children[1].className="stars"
+  stars.children[2].className="stars"
 
   // elements[0].childNodes[0].classList.add("fa fa-paper-plane-o")
+  start=0;
+  score.innerHTML = 0;
+
 });
 function timerStart() {
   sec = sec + 1;
@@ -182,16 +191,16 @@ function rating() {
       stars.children[0].className = "rating";
       stars.children[1].className = "rating";
       stars.children[2].className = "rating";
-      score.innerHTML = moves;
+      
     }
     if (moves > 10) {
       stars.children[0].className = "rating";
       stars.children[1].className = "rating";
-      score.innerHTML = moves;
+     
     }
     if (moves >= 20) {
       stars.children[0].className = "rating";
-      score.innerHTML = moves;
+      
     }
   }
 }
