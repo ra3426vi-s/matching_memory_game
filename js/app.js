@@ -5,6 +5,9 @@ let deck = document.querySelector(".deck");
 let restart = document.querySelector(".restart");
 let elements = document.querySelectorAll(".card");
 let timer = document.querySelector(".timer");
+let stars = document.querySelector(".stars ");
+let score = document.querySelector(".moves");
+
 //let cardopen= document.querySelectorAll(".card.open.show");
 
 let anchorelements = document.querySelectorAll(".card i");
@@ -14,6 +17,8 @@ var sec = 0;
 var min = 0;
 var start = 0;
 var intervalStart;
+var moves = 0;
+var match = 0;
 
 for (let i = 0; i < anchorelements.length; i++) {
   allclasses.push(anchorelements[i].className);
@@ -54,6 +59,7 @@ var count = 1;
 array = [];
 deck.addEventListener("click", function (e) {
   e.target.classList.add("open", "show");
+
   if (start == 0) {
     intervalStart = window.setInterval(timerStart, 1000);
     start = start + 1;
@@ -82,6 +88,7 @@ deck.addEventListener("click", function (e) {
           }
         }
         cardopen = [];
+        moves = moves + 1;
       }, 2000);
     }
     if (
@@ -90,8 +97,11 @@ deck.addEventListener("click", function (e) {
     ) {
       //console.log("equal")
       cardopen = [];
+      moves = moves + 1;
+      match = match + 2;
     }
   }
+  rating();
 });
 
 restart.addEventListener("click", function (e) {
@@ -138,7 +148,6 @@ function timerStart() {
     timer.innerHTML = "0" + min + ":" + sec;
   }
   if (sec < 10 && min >= 10) {
-    s;
     timer.innerHTML = min + ":" + "0" + sec;
   }
   if (sec >= 10 && min >= 10) {
@@ -148,6 +157,43 @@ function timerStart() {
 function timerReset() {
   window.clearInterval(intervalStart);
   timer.innerHTML = "0" + "0" + ":" + "0" + "0";
+}
+function timerPause() {
+  window.clearInterval(intervalStart);
+  if (sec < 10 && min < 10) {
+    timer.innerHTML = "0" + min + ":" + "0" + sec;
+  }
+  if (sec >= 10 && min < 10) {
+    timer.innerHTML = "0" + min + ":" + sec;
+  }
+  if (sec < 10 && min >= 10) {
+    timer.innerHTML = min + ":" + "0" + sec;
+  }
+  if (sec >= 10 && min >= 10) {
+    timer.innerHTML = min + ":" + sec;
+  }
+}
+
+function rating() {
+  if (match == elements.length) {
+    console.log("i am in in rating");
+    timerPause();
+    if (moves <= 10) {
+      stars.children[0].className = "rating";
+      stars.children[1].className = "rating";
+      stars.children[2].className = "rating";
+      score.innerHTML = moves;
+    }
+    if (moves > 10) {
+      stars.children[0].className = "rating";
+      stars.children[1].className = "rating";
+      score.innerHTML = moves;
+    }
+    if (moves >= 20) {
+      stars.children[0].className = "rating";
+      score.innerHTML = moves;
+    }
+  }
 }
 
 /*
