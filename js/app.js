@@ -6,7 +6,12 @@ let restart = document.querySelector(".restart");
 let elements = document.querySelectorAll(".card");
 let timer = document.querySelector(".timer");
 let stars = document.querySelector(".stars ");
+let stars2 = document.querySelector(".stars2 ");
 let score = document.querySelector(".moves");
+var mod = document.getElementById("myModal")
+var finalMoves=document.querySelector(".finalmoves")
+var finalTime=document.querySelector(".finaltime")
+var reset=document.querySelector(".btn")
 
 //let cardopen= document.querySelectorAll(".card.open.show");
 
@@ -101,9 +106,11 @@ deck.addEventListener("click", function (e) {
       moves = moves + 1;
       match = match + 2;
       score.innerHTML = moves;
+      
     }
   }
   rating();
+  popup();
   
 });
 
@@ -141,6 +148,8 @@ restart.addEventListener("click", function (e) {
   // elements[0].childNodes[0].classList.add("fa fa-paper-plane-o")
   start=0;
   score.innerHTML = 0;
+  moves=0;
+  match=0;
 
 });
 function timerStart() {
@@ -165,7 +174,9 @@ function timerStart() {
 }
 function timerReset() {
   window.clearInterval(intervalStart);
-  timer.innerHTML = "0" + "0" + ":" + "0" + "0";
+  sec=0;
+  min=0;
+  timer.innerHTML = "0" + min + ":" + "0" + sec;
 }
 function timerPause() {
   window.clearInterval(intervalStart);
@@ -184,6 +195,7 @@ function timerPause() {
 }
 
 function rating() {
+  
   if (match == elements.length) {
     console.log("i am in in rating");
     timerPause();
@@ -203,6 +215,75 @@ function rating() {
       
     }
   }
+}
+
+function popup(){
+  console.log("checking moves",moves)
+  if (match == elements.length) {
+    mod.style.display="block";
+    finalMoves.innerHTML = moves;
+    
+    if (sec < 10 && min < 10) {
+      finalTime.innerHTML = "0" + min + ":" + "0" + sec;
+    }
+    if (sec >= 10 && min < 10) {
+      finalTime.innerHTML = "0" + min + ":" + sec;
+    }
+    if (sec < 10 && min >= 10) {
+      finalTime.innerHTML = min + ":" + "0" + sec;
+    }
+    if (sec >= 10 && min >= 10) {
+      finalTime.innerHTML =  min + ":" + sec;
+    }
+   //rating
+   if (moves <= 10) {
+    stars2.children[0].className = "rating";
+    stars2.children[1].className = "rating";
+    stars2.children[2].className = "rating";
+    
+  }
+  if (moves > 10) {
+    stars2.children[0].className = "rating";
+    stars2.children[1].className = "rating";
+   
+  }
+  if (moves >= 20) {
+    stars2.children[0].className = "rating";
+    
+  }
+
+  
+  reset.addEventListener("click",function(){
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].classList.remove("card", "open", "show");
+      elements[i].classList.add("card");
+      
+    }
+    //console.log(chinod);
+    var ele = shuffle(allclasses);
+   
+  
+    for (var i = 0; i < ele.length; i++) {
+      //console.log("hey",elements[i].childNodes[1])
+      anchorelements[i].className = ele[i];
+     
+    }
+    timerReset();
+    stars.children[0].className="stars"
+    stars.children[1].className="stars"
+    stars.children[2].className="stars"
+  
+    // elements[0].childNodes[0].classList.add("fa fa-paper-plane-o")
+    start=0;
+    moves=0;
+    score.innerHTML = 0;
+    match=0
+    mod.style.display = "none";
+  
+
+});
+  }
+
 }
 
 /*

@@ -97,11 +97,22 @@ h1 {
     display: inline-block;
     margin: 0 5px 0 0;
 }
+.score-panel .stars2 {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
 
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
 }
+.score-panel .stars2 li {
+    list-style: none;
+    display: inline-block;
+}
+
 
 .score-panel .restart {
     float: right;
@@ -114,5 +125,39 @@ h1 {
 }
 .rating{
     color: orange;
+}
+.btn{
+    background-color: rgb(0, 195, 255);
+    margin:auto; 
+    display:block;
+    padding: 10px 32px;
+    text-align: center;
+    
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); 
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .finalmoves{
+      padding-left: 10px;
+  }
+  .finaltime{
+    padding-left: 10px;
 }
 
